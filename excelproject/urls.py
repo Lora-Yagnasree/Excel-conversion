@@ -16,13 +16,13 @@ Including another URLconf
 """
 # urls.py
 # excelproject/urls.py
-
 from django.contrib import admin
 from django.urls import path
-from excelapp import views  
+from excelapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('applicants/', views.applicant_list, name='applicant_list'),
     path('export_excel/', views.export_applicants_to_excel, name='export_excel'),
+    path('submit_applicant/', views.submit_applicant, name='submit_applicant'),  # ✅ new
 ]

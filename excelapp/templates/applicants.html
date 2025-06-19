@@ -6,6 +6,25 @@
     <link rel="stylesheet" href="{% static 'css/applicant.css' %}">
 </head>
 <body>
+    <h2>Submit New Applicant</h2>
+
+    <!-- ✅ Form to add new applicant -->
+    <form method="post" action="{% url 'submit_applicant' %}">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label>Phone:</label>
+        <input type="text" name="phone" required><br><br>
+
+        <button type="submit">Submit Applicant</button>
+    </form>
+
+    <hr>
+
     <h2>Applicant List</h2>
 
     <!-- Export to Excel Button -->
@@ -13,22 +32,28 @@
         <button type="submit">Export to Excel</button>
     </form>
 
-    <!-- (Optional) Display Data -->
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Applied On</th>
-        </tr>
-        {% for applicant in applicants %}
-        <tr>
-            <td>{{ applicant.name }}</td>
-            <td>{{ applicant.email }}</td>
-            <td>{{ applicant.phone }}</td>
-            <td>{{ applicant.applied_on }}</td>
-        </tr>
-        {% endfor %}
+    <!-- Applicant Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Applied On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for applicant in applicants %}
+            <tr>
+                <td>{{ applicant.name }}</td>
+                <td>{{ applicant.email }}</td>
+                <td>{{ applicant.phone }}</td>
+                <td>{{ applicant.applied_on }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No applicants yet.</td></tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 </html>
